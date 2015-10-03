@@ -39,15 +39,18 @@ if (!empty($_POST)) {
     }
     
  
+ 
     $query = "INSERT INTO users ( username, email,password,phone ) VALUES ( :username, :email, :password, :phone ) ";
         $query_params = array(
-        ':username' => $_POST['username'],
+        ':username' => $_POST['fname'],
         ':email' => $_POST['email'],
         ':password' => $_POST['password'],
         ':phone' => $_POST['phone'],
 		
     );
-    
+   
+    //$query = "INSERT INTO users (username, email,password,phone ) VALUES ( '$_POST['name']', '$_POST['email']', '$_POST['password']', '$_POST['phone']' ) ";
+   
     try {
         $stmt   = $db->prepare($query);
         $result = $stmt->execute($query_params);
@@ -60,7 +63,7 @@ if (!empty($_POST)) {
     
 
     $response["success"] = 1;
-    $response["message"] = "Username Successfully Added!";
+    $response["message"] = "User Successfully Added!";
     echo json_encode($response);
      
     
